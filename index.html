@@ -1,11 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Votre Bibliothèque</title>
+    <link rel="stylesheet" href="./assets/style.css">
 </head>
-<body>
-    
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen">
+
+    <!-- Navbar -->
+    <header class="bg-indigo-600 text-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Local-Library</h1>
+            <span id="book-count" class="bg-indigo-800 px-3 py-1 rounded-full text-sm font-semibold">0 livre(s)</span>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 max-w-6xl grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- SECTION GAUCHE : Formulaire (US-01 / US-04) -->
+        <section class="lg:col-span-1">
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 sticky top-8">
+                <h2 id="form-title" class="text-xl font-bold mb-4 text-slate-700">Ajouter un livre</h2>
+                
+                <form id="book-form" class="space-y-4">
+                    <!-- ID caché pour la modification (US-04) -->
+                    <input type="hidden" id="book-id">
+
+                    <div>
+                        <label for="title" class="block text-sm font-medium text-slate-700">Titre </label>
+                        <input type="text" id="title" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border" required>
+                    </div>
+                    
+                    <div>
+                        <label for="author" class="block text-sm font-medium text-slate-700">Auteur </label>
+                        <input type="text" id="author" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border" required>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="year" class="block text-sm font-medium text-slate-700">Année</label>
+                            <input type="number" id="year" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border">
+                        </div>
+                        <div>
+                            <label for="genre" class="block text-sm font-medium text-slate-700">Genre</label>
+                            <input type="text" id="genre" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="status" class="block text-sm font-medium text-slate-700">Statut de lecture</label>
+                        <select id="status" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border bg-white">
+                            <option value="to-read">À lire (To-read)</option>
+                            <option value="reading">En cours (Reading)</option>
+                            <option value="read">Lu (Read)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="description" class="block text-sm font-medium text-slate-700">Description</label>
+                        <textarea id="description" rows="3" class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border resize-none"></textarea>
+                    </div>
+
+                    <button type="submit" id="submit-btn" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 transition-colors">
+                        Enregistrer le livre
+                    </button>
+                    <!-- Bouton annuler (masqué par défaut, utile pour US-04) -->
+                    <button type="button" id="cancel-edit-btn" class="hidden w-full mt-2 py-2 px-4 border border-slate-300 rounded-md shadow-sm text-sm font-bold text-slate-700 bg-white hover:bg-slate-50 transition-colors">
+                        Annuler la modification
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- SECTION DROITE : Liste, Recherche et Tri (US-02 / US-03) -->
+        <section class="lg:col-span-2">
+            
+            <!-- Barre d'outils : Recherche et Tri -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6 flex flex-col sm:flex-row gap-4">
+                <div class="flex-1">
+                    <input type="text" id="search-input" placeholder="Rechercher par titre ou auteur..." class="w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border">
+                </div>
+                <div class="sm:w-48">
+                    <select id="sort-select" class="w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border bg-white">
+                        <option value="title">Trier par: Titre</option>
+                        <option value="author">Trier par: Auteur</option>
+                        <option value="year">Trier par: Année</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Conteneur des livres (injectés via JS) -->
+            <div id="books-container" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Les cartes générées par ui.js apparaîtront ici -->
+            </div>
+            
+            <!-- Message si aucun livre -->
+            <div id="empty-state" class="hidden text-center py-12">
+                <p class="text-slate-500 text-lg">Aucun livre trouvé dans la bibliothèque.</p>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Connexion au point d'entrée JavaScript (Module ES6) -->
+    <script type="module" src="./src/script.js"></script>
 </body>
 </html>
