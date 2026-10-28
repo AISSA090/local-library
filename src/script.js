@@ -1,3 +1,5 @@
+import { createBook } from './modules/book.js';
+
 const titleError = document.getElementById('title-error');
 const authorError = document.getElementById('author-error');
 const yearError = document.getElementById('year-error');
@@ -8,11 +10,12 @@ const author = document.getElementById('author');
 const year = document.getElementById('year');
 const genre = document.getElementById('genre');
 const description = document.getElementById('description');
-const status = document.getElementById('status').value; 
+const status = document.getElementById('status'); 
 const nameregex=/^[a-zA-ZÀ-ÿ ]{2,}$/
 const titleRegex = /^[a-zA-Z0-9À-ÿ \-':,!.+&]{2,}$/;
 const yearregex=/^[0-9]{4}$/
 const genreRegex = /^[a-zA-ZÀ-ÿ \-&]{3,}$/;
+const allbooks = [];
 
 author.addEventListener('input',function(){
     if(author.value==""){
@@ -76,8 +79,7 @@ description.addEventListener('input', function() {
         descriptionError.classList.add('hidden');
         return; 
     }
-    
-    // On vérifie simplement si la longueur du texte est inférieure à 30 caractères
+
     if(description.value.length < 30){
         descriptionError.textContent = "La description est trop courte (minimum 30 caractères).";
         descriptionError.classList.remove('hidden');
@@ -85,4 +87,28 @@ description.addEventListener('input', function() {
         descriptionError.textContent = "";
         descriptionError.classList.add('hidden');
     }
+});
+
+const bookForm = document.getElementById('book-form');
+
+bookForm.addEventListener('submit', function(e) {
+    e.preventDefault(); 
+    const titleVal = title.value.trim();
+    const authorVal = author.value.trim();
+    const yearVal = year.value.trim();
+    const genreVal = genre.value.trim();
+    const descVal = description.value.trim();
+    const statusVal = status.value; 
+
+    const newBook = createBook(titleVal, authorVal, yearVal, genreVal, descVal, statusVal);
+
+    allbooks.push(newBook);
+
+    bookForm.reset();
+    const successMessage = document.getElementById('success-message');
+    successMessage.classList.remove('hidden');
+
+setTimeout(function() {
+    successMessage.classList.add('hidden');
+}, 3000);
 });
