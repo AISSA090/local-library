@@ -17,6 +17,7 @@ const titleRegex = /^[a-zA-Z0-9À-ÿ \-':,!.+&]{2,}$/;
 const yearregex=/^[0-9]{4}$/
 const genreRegex = /^[a-zA-ZÀ-ÿ \-&]{3,}$/;
 const allbooks = [];
+const cancelButton=document.getElementById('cancel-edit-btn')
 
 author.addEventListener('input',function(){
     if(author.value==""){
@@ -88,7 +89,10 @@ description.addEventListener('input', function() {
         descriptionError.textContent = "";
         descriptionError.classList.add('hidden');
     }
+
 });
+
+
 
 const bookForm = document.getElementById('book-form');
 
@@ -123,3 +127,12 @@ function deleteBook(bookId) {
     
     displayBooks(allbooks, deleteBook);
 }
+bookForm.addEventListener('input', function() {
+    cancelButton.classList.remove('hidden');
+});
+
+cancelButton.addEventListener('click', function() {
+    bookForm.reset();
+    cancelButton.classList.add('hidden'); // Hides the button again!
+    
+});
