@@ -1,4 +1,5 @@
 import { createBook } from './modules/book.js';
+import { displayBooks  } from './modules/ui.js';
 
 const titleError = document.getElementById('title-error');
 const authorError = document.getElementById('author-error');
@@ -111,4 +112,5 @@ bookForm.addEventListener('submit', function(e) {
 setTimeout(function() {
     successMessage.classList.add('hidden');
 }, 3000);
+displayBooks(allbooks);
 });
