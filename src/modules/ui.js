@@ -1,4 +1,4 @@
-export function displayBooks(booksArray) {
+export function displayBooks(booksArray,deleteBook) {
     const container = document.getElementById('books-container');
     const emptyState = document.getElementById('empty-state');
 
@@ -41,10 +41,17 @@ export function displayBooks(booksArray) {
         const statusSpan = document.createElement('span');
         statusSpan.className = "inline-block px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full text-xs font-semibold";
         statusSpan.textContent = book.status;
+
+        const deleteButton = document.createElement('button');
+        deleteButton.className="w-full bg-red-50 text-red-600 hover:bg-red-100 py-2 rounded-md text-sm font-medium transition-colors mt-4";
+        deleteButton.textContent="Supprimer";
+        deleteButton.addEventListener('click', function() {
+        deleteBook(book.id); 
+        });
         
         statusDiv.appendChild(statusSpan);
 
-        card.append(title, author, year, genre, description, statusDiv);
+        card.append(title, author, year, genre, description, statusDiv,deleteButton);
         
         container.appendChild(card);
     });

@@ -67,7 +67,7 @@ genre.addEventListener('input',function(){
         return;
     }
  if(!genreRegex.test(genre.value)){
-    genreError.textContent="L'année doit contenir exactement 4 chiffres (ex: 2026).";
+    genreError.textContent="Le genre doit avoir au moins 4 character.";
     genreError.classList.remove('hidden')
  }else{
    genreError.textContent="";
@@ -112,5 +112,14 @@ bookForm.addEventListener('submit', function(e) {
 setTimeout(function() {
     successMessage.classList.add('hidden');
 }, 3000);
-displayBooks(allbooks);
+displayBooks(allbooks,deleteBook);
 });
+function deleteBook(bookId) {
+    const index = allbooks.findIndex(book => book.id === bookId);
+    
+    if (index !== -1) {
+        allbooks.splice(index, 1);
+    }
+    
+    displayBooks(allbooks, deleteBook);
+}
