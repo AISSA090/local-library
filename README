@@ -1,0 +1,56 @@
+📚 Local-Library
+
+Local-Library est une application web de gestion de bibliothèque personnelle permettant aux utilisateurs de gérer facilement leur collection de livres. Ce projet a été développé en pur Vanilla JavaScript en utilisant une architecture modulaire, démontrant la maîtrise des opérations CRUD et de la manipulation du DOM.
+
+🚀 Fonctionnalités (User Stories complétées)
+
+Création (Add) : Ajout de nouveaux livres avec validation de formulaire dynamique (Regex).
+
+Lecture (Read) : Affichage dynamique des livres sous forme de cartes.
+
+Mise à jour (Update) : Modification des informations d'un livre existant directement depuis l'interface (US-04).
+
+Suppression (Delete) : Suppression d'un livre avec boîte de dialogue de confirmation.
+
+Persistance des données : Sauvegarde automatique de la bibliothèque dans le navigateur via LocalStorage (US-02 & US-06).
+
+Recherche et Tri : Filtrage en temps réel par titre/auteur et tri alphabétique ou chronologique (US-03).
+
+Compteur dynamique : Affichage en temps réel du nombre total de livres dans la collection.
+
+🛠️ Technologies Utilisées
+
+HTML5 : Structure de l'application.
+
+Tailwind CSS : Styling rapide, responsive et moderne directement via les classes utilitaires.
+
+Vanilla JavaScript (ES6) : Logique de l'application, manipulation du DOM et gestion des événements sans aucun framework.
+
+📂 Architecture du Code
+
+Le code JavaScript a été scindé en plusieurs modules pour respecter le principe de responsabilité unique (Separation of Concerns) :
+
+script.js : Le "cerveau" de l'application. Gère les événements du formulaire, la validation et la logique métier.
+
+ui.js : Gère exclusivement la création et l'affichage dynamique des éléments HTML (les cartes de livres, les boutons).
+
+storage.js : Gère les interactions avec le LocalStorage (saveBooks, loadBooks).
+
+book.js : Contient la logique de création d'un objet "Livre" (Factory function).
+
+💻 Installation et Utilisation
+
+Clonez ce dépôt sur votre machine locale :
+
+git clone https://github.com/Aissa/local-library.git
+
+
+Ouvrez le dossier du projet dans votre éditeur de code (ex: VS Code).
+
+Ouvrez le fichier index.html dans votre navigateur, ou utilisez une extension comme Live Server pour une meilleure expérience.
+
+Aucune installation de dépendance (npm) n'est requise.
+
+👤 Auteur
+
+Développé par [Ton Prénom / Nom ou Pseudo]

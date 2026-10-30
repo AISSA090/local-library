@@ -1,6 +1,10 @@
-export function displayBooks(booksArray,deleteBook) {
+export function displayBooks(booksArray,deleteBook,editBook) {
     const container = document.getElementById('books-container');
     const emptyState = document.getElementById('empty-state');
+    const bookCount = document.getElementById('book-count');
+    if (bookCount) {
+        bookCount.textContent = booksArray.length + " livre(s)";
+    }
 
     container.replaceChildren(); 
 
@@ -48,10 +52,16 @@ export function displayBooks(booksArray,deleteBook) {
         deleteButton.addEventListener('click', function() {
         deleteBook(book.id); 
         });
+        const editButton = document.createElement('button');
+        editButton.textContent = "Modifier";
+        editButton.className = "w-full bg-blue-50 text-blue-600 hover:bg-blue-100 py-2 rounded-md text-sm font-medium transition-colors mt-4 mb-2";
+        editButton.addEventListener('click', function() {
+        editBook(book); 
+        });
         
         statusDiv.appendChild(statusSpan);
 
-        card.append(title, author, year, genre, description, statusDiv,deleteButton);
+        card.append(title, author, year, genre, description, statusDiv,deleteButton,editButton);
         
         container.appendChild(card);
     });
